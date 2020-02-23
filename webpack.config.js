@@ -1,8 +1,16 @@
+const path = require('path');
+
+const webpack = require('webpack');
+
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CircularDependencyPlugin = require('circular-dependency-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CircularDependencyPlugin = require('circular-dependency-plugin');
-const path = require('path');
-const webpack = require('webpack');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+
 const APP_PATH = path.resolve(__dirname, 'src');
 
 /**
@@ -40,7 +48,22 @@ const splitChunks = {
 };
 
 const basePlugins = [
-	new HtmlWebpackPlugin({ inject: true, template: path.join(APP_PATH, 'index.html') }),
+	// Build the app
+	new HtmlWebpackPlugin({
+		title: 'App',
+		chunksSortMode: 'dependency',
+		meta: {
+			'viewport': 'minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no',
+			'mobile-web-app-capable': 'yes',
+		},
+		excludeChunks: ['app'],
+	}),
+	new ScriptExtHtmlWebpackPlugin({
+		sync: [
+			/vendors.*\.js/,
+		],
+		defaultAttribute: 'async',
+	}),
 	new ForkTsCheckerWebpackPlugin(),
 	new CircularDependencyPlugin({
 		// exclude detection of files based on a RegExp
@@ -57,19 +80,37 @@ const basePlugins = [
 
 const devPlugins = [
 	new webpack.SourceMapDevToolPlugin({
-		columns: true,
 		filename: '[file].map[query]',
+		// module: false,
 		// If this gets slow exclude vendors
-		// lineToLine: true,
-		module: false,
+		// exclude: /vendors.*\.js/,
 	}),
 	new webpack.HotModuleReplacementPlugin(),
 ];
 
 const prodPlugins = [
+	new CleanWebpackPlugin(),
+
+	// @see https://webpack.js.org/plugins/mini-css-extract-plugin/
+	new MiniCssExtractPlugin({
+		filename: '[name].[contenthash].css',
+	}),
 ];
 
-const prodOptimization = {};
+
+const prodOptimization = {
+	minimizer: [
+		new TerserPlugin({
+			cache: true,
+			parallel: true,
+			sourceMap: true, // Must be set to true if using source-maps in production
+			terserOptions: {
+				// https://github.com/webpack-contrib/terser-webpack-plugin#terseroptions
+			},
+		}),
+		new OptimizeCSSAssetsPlugin({}),
+	],
+};
 
 module.exports = ({
 	production = false,
