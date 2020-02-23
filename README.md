@@ -1,6 +1,6 @@
-# React-Webpack-TypeScript-Babel
+# web-2
 
-> This is sample repository demonstrates how to use React, Webpack, TypeScript and Babel
+A fork of [a-tarasyuk/react-webpack-typescript-babel](https://github.com/a-tarasyuk/react-webpack-typescript-babel) with whatever changes I make. For instance, `eslint`.
 
 ## Starting the development server
 
