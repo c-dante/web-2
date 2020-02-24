@@ -1,16 +1,25 @@
 'use strict';
 module.exports = {
 	extends: [
+		'eslint:recommended',
+		'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:@typescript-eslint/recommended',
 		'plugin:react/recommended',
+		'plugin:jsx-a11y/recommended'
 	],
 	root: true,
 	plugins: [
 		'@typescript-eslint',
 		'react',
+		'jsx-a11y',
+		'react-hooks'
 	],
 	parser: '@typescript-eslint/parser',
 	parserOptions: {
+		ecmaVersion: 6,
+		sourceType: 'module',
 		ecmaFeatures: {
+			modules: true,
 			jsx: true
 		}
 	},
@@ -25,6 +34,12 @@ module.exports = {
 		}
 	},
 	rules: {
+		// Patching functional component missing return type
+		'@typescript-eslint/explicit-function-return-type': [1, {
+      'allowExpressions': true,
+      'allowTypedFunctionExpressions': true
+		}],
+
 		'react/react-in-jsx-scope': [0],
 		'arrow-parens': [0],
 		'object-curly-newline': ['error', {

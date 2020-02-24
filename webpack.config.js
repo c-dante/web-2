@@ -64,7 +64,9 @@ const basePlugins = [
 		],
 		defaultAttribute: 'async',
 	}),
-	new ForkTsCheckerWebpackPlugin(),
+	new ForkTsCheckerWebpackPlugin({
+		eslint: true,
+	}),
 	new CircularDependencyPlugin({
 		// exclude detection of files based on a RegExp
 		exclude: /node_modules/,

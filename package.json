@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "description": "A sample setup using React, Webpack and Babel to build TypeScript code, and using TypeScript for type-checking.",
   "scripts": {
-    "type-check": "tsc --noEmit",
-    "type-check:watch": "npm run type-check -- --watch",
     "build": "webpack --progress --colors --env.production",
-    "start": "webpack-dev-server --config webpack.config.js --progress --colors --mode=development"
+    "linter": "npx eslint --fix src/**/*",
+    "start": "webpack-dev-server --config webpack.config.js --progress --colors --mode=development",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "npm run type-check -- --watch"
   },
   "author": {
     "name": "Alexander T.",
@@ -16,12 +17,15 @@
   "devDependencies": {
     "@babel/core": "7.8.4",
     "@babel/plugin-proposal-class-properties": "7.8.3",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "7.8.3",
     "@babel/plugin-proposal-object-rest-spread": "7.8.3",
+    "@babel/plugin-proposal-optional-chaining": "7.8.3",
     "@babel/preset-env": "7.8.4",
     "@babel/preset-react": "7.8.3",
     "@babel/preset-typescript": "7.8.3",
     "@typescript-eslint/eslint-plugin": "2.20.0",
     "@typescript-eslint/parser": "2.20.0",
+    "babel-eslint": "10.0.3",
     "babel-loader": "8.0.6",
     "circular-dependency-plugin": "5.2.0",
     "clean-webpack-plugin": "3.0.0",

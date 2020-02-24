@@ -1,9 +1,9 @@
-import React, { SFC } from 'react';
+import React from 'react';
 
-export interface HelloProps {
+type HelloProps = {
   name: string;
 }
 
-export const Hello: SFC<HelloProps> = ({ name }) => (
-  <h1>{ name }</h1>
+export const Hello = ({ name }: HelloProps): JSX.Element => (
+	<h1>{ name }</h1>
 );
