@@ -1,9 +1,10 @@
 import React from 'react';
+import { Typography } from '@material-ui/core';
 
 type HelloProps = {
   name: string;
 }
 
 export const Hello = ({ name }: HelloProps): JSX.Element => (
-	<h1>{ name }</h1>
+	<Typography variant="h1">{name}</Typography>
 );

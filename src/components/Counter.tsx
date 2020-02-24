@@ -1,4 +1,9 @@
 import React, { useState } from 'react';
+import { Typography, ButtonGroup, IconButton } from '@material-ui/core';
+import {
+	Add as AddIcon,
+	Remove as RemoveIcon,
+} from '@material-ui/icons';
 
 type CounterProps = {
 	value?: number;
@@ -11,9 +16,15 @@ export const Counter = ({
 
 	return (
 		<>
-			<div>{value}</div>
-			<button onClick={() => setValue(value - 1)}>+</button>
-			<button onClick={() => setValue(value + 1)}>-</button>
+			<Typography>{value}</Typography>
+			<ButtonGroup size="small">
+				<IconButton onClick={() => setValue(value - 1)}>
+					<RemoveIcon />
+				</IconButton>
+				<IconButton onClick={() => setValue(value + 1)}>
+					<AddIcon />
+				</IconButton>
+			</ButtonGroup>
 		</>
 	);
 };

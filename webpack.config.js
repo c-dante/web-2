@@ -57,6 +57,7 @@ const basePlugins = [
 			'mobile-web-app-capable': 'yes',
 		},
 		excludeChunks: ['app'],
+		template: path.resolve(APP_PATH, 'index.html'),
 	}),
 	new ScriptExtHtmlWebpackPlugin({
 		sync: [
