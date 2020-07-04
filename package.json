@@ -25,6 +25,8 @@
     "@babel/preset-typescript": "7.8.3",
     "@typescript-eslint/eslint-plugin": "2.20.0",
     "@typescript-eslint/parser": "2.20.0",
+    "@types/react": "16.9.19",
+    "@types/react-dom": "16.9.5",
     "babel-eslint": "10.0.3",
     "babel-loader": "8.0.6",
     "circular-dependency-plugin": "5.2.0",
@@ -47,8 +49,6 @@
     "webpack-dev-server": "3.10.3"
   },
   "dependencies": {
-    "@types/react": "16.9.19",
-    "@types/react-dom": "16.9.5",
     "react": "16.12.0",
     "react-dom": "16.12.0"
   },
